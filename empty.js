@@ -1,1 +1,3 @@
-module.exports = class Empty { }
+class Empty { }
+
+export default Empty;

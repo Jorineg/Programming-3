@@ -1,16 +1,16 @@
-const utils = require('./utils.js');
-const Empty = require('./empty.js');
-const GrassEater = require('./grassEater.js');
-let matrix = require('./game.js').matrix;
+import Empty from './empty.js';
+import GrassEater from './grassEater.js';
+import { state, findNeighbourPositions, random, updateCreaturePosition } from './utils.js';
+
 
 // MeatEater looks for grass eater in its neighbour cells.
 // If it finds grass eater, it moves to that cell, eats the grass eater and gains 10 energy.
 // If it doesn't find grass eater, it loses 1 energy.
 // If it has 120 energy, it creates a new meat eater object in an empty neighbour cell
 // and loses 100 energy.
-module.exports = class MeatEater {
+class MeatEater {
     constructor() {
-        this.stepCount = frameCount + 1;
+        this.stepCount = state.frameCount + 1;
         this.color = "red";
         this.energy = 100;
     }
@@ -32,7 +32,7 @@ module.exports = class MeatEater {
             let randomEmptyField = random(emptyFields);
             let row = randomEmptyField[0];
             let col = randomEmptyField[1];
-            matrix[row][col] = new MeatEater();
+            state.matrix[row][col] = new MeatEater();
         }
     }
 
@@ -43,7 +43,9 @@ module.exports = class MeatEater {
             this.multiply();
             this.energy -= 100;
         } else if (this.energy <= 0) {
-            matrix[this.row][this.col] = new Empty();
+            state.matrix[this.row][this.col] = new Empty();
         }
     }
 }
+
+export default MeatEater;

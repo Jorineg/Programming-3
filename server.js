@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
-const game = require('./game.js');
+import { setup, draw } from './game.js';
 
-game.setup();
+setup();
 
 setInterval(() => {
-    game.draw();
-}, 1000);
-
+    draw();
+}, 100);

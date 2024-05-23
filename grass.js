@@ -1,15 +1,11 @@
-const utils = require('./utils.js');
-let matrix = require('./game.js').matrix;
+import Empty from './empty.js';
+import { state, findNeighbourPositions, random } from './utils.js';
 
-// Grass starts with a random energy between 0 and 2.
-// It gains 1 energy every frame.
-// When it reaches 7 energy, it creates a new grass object
-// in an empty neighbour cell and resets its energy to 0.
-module.exports = class Grass {
+class Grass {
     constructor() {
-        this.stepCount = frameCount + 1;
-        this.color = "green";
-        this.energy = int(random(0, 3));
+        this.stepCount = state.frameCount + 1;
+        this.color = 'green';
+        this.energy = Math.floor(random(0, 3));
     }
 
     step() {
@@ -22,12 +18,14 @@ module.exports = class Grass {
     }
 
     multiply() {
-        let emptyFields = utils.findNeighbourPositions(this.row, this.col, 1, Empty);
+        let emptyFields = findNeighbourPositions(this.row, this.col, 1, Empty);
         if (emptyFields.length > 0) {
-            let randomEmptyField = utils.random(emptyFields);
+            let randomEmptyField = random(emptyFields);
             let row = randomEmptyField[0];
             let col = randomEmptyField[1];
-            matrix[row][col] = new Grass();
+            state.matrix[row][col] = new Grass();
         }
     }
 }
+
+export default Grass;
