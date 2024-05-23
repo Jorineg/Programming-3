@@ -1,6 +1,6 @@
 import Empty from './empty.js';
 
-const size = 30;
+const size = 50;
 const blockSize = 15;
 
 let state = {

@@ -54,14 +54,14 @@ function draw() {
             obj.col = col;
 
             fill(obj.color);
-            rect(blockSize * obj.col, blockSize * obj.row, blockSize, blockSize);
+            //    rect(blockSize * obj.col, blockSize * obj.row, blockSize, blockSize);
 
             if (obj instanceof Empty) continue;
             obj.step();
         }
-        process.stdout.write('\n');
+        //process.stdout.write('\n');
     }
-    process.stdout.write('\x1b[' + size + 'A');
+    //process.stdout.write('\x1b[' + size + 'A');
     fill('reset');
     state.frameCount++;
 }
