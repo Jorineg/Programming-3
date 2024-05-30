@@ -1,11 +1,9 @@
 // client side code
 // use socket io to connect to the server and receive state
 // state is a matrix of colors, should be getting displayed with p5.js
-
-const socket = io('http://localhost:3000');
-
+const socket = io();
 function setup() {
-    createCanvas(1200, 800);
+    createCanvas(windowWidth, windowHeight);
     const cellSize = 20;
     socket.on('matrix', (matrix) => {
         background(255);
