@@ -1,5 +1,5 @@
 import { setup, draw } from './simulation/simulation.js';
-import { getTransformedMatrix } from './simulation/transformMatrix.js';
+import { getTransformedMatrix } from './simulation/utils.js';
 
 import express from 'express';
 import { Server } from 'socket.io';

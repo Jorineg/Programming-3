@@ -12,15 +12,24 @@ export function incrementFrameCount() {
 export function random(...args) {
     if (args.length === 0) {
         return Math.random();
-    } else if (args.length === 1) {
-        // if array type is passed, return random element from array
-        if (Array.isArray(args[0])) {
-            return args[0][Math.floor(Math.random() * args[0].length)];
-        } else {
-            return Math.floor(Math.random() * args[0]);
-        }
-    } else if (args.length === 2) {
-        return Math.floor(Math.random() * (args[1] - args[0])) + args[0];
+    } else if (args.length === 1 && Array.isArray(args[0])) {
+        return args[0][Math.floor(Math.random() * args[0].length)];
+    } else if (args.length === 1 && typeof args[0] === 'number') {
+        return Math.floor(Math.random() * args[0]);
+    } else if (args.length === 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
+        return Math.floor(Math.random() * (args[1] - args[0] + 1) - args[0]);
+    } else {
+        console.log(args);
+        throw new Error('Invalid arguments');
+    }
+}
+
+// like p5 int function
+export function int(value) {
+    if (Array.isArray(value)) {
+        return value.map(int);
+    } else {
+        return Math.floor(value);
     }
 }
 
@@ -66,5 +75,20 @@ export function findNeighbourPositions(row, col, distance, creatureType) {
     return positions;
 }
 
+// Diese Funktion sorgt dafür, dass die Matrix nur noch Strings mit Farben enthält
+export function getTransformedMatrix() {
+    return matrix.map(row => row.map(cell => cell.color || 'white'));
+}
 
+
+// Funktion für andere Version, wo die Matrix Zahlen enthält
+// export function getTransformedMatrix() {
+//     let colorMap = {
+//         0: 'white',
+//         1: 'green',
+//         2: 'yellow',
+//         3: 'red'
+//     }
+//     return matrix.map(row => row.map(cell => colorMap[cell]));
+// }
 
